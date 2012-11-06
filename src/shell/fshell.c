@@ -23,3 +23,52 @@ int init_shell(){
 void print_prompt(){
 	fprintf(stdout, "<%s@%s:%s>:\n", env->user, env->hostname, env->pwd);
 }
+
+
+char *read_command(){
+	char *cmd = (char*)malloc(BUFF_SIZE * sizeof(char));
+
+	/*Sanity check into allocated pointer*/
+	if (!cmd){
+		fprintf(stderr, "Error on allocate memory, exiting\n");
+		exit(ENOMEM);
+	}
+
+	cmd = gets(cmd);
+
+	if (!cmd){
+		fprintf(stderr, "Could not read a command, skipping this round\n");
+		return NULL;
+	}
+
+	return cmd;
+}
+
+int start_shell(){
+	char *cmd;
+
+	/*Priting prompt for the first time*/
+	print_prompt();
+	
+	/*Reading the first command*/
+	cmd = read_command();
+	if (!cmd){
+		fprintf(stderr, "Error on get command\n");
+		return 0;
+	}
+
+	while(strcmp(cmd, "exit") != 0){
+		printf("Read command: %s\n", cmd);
+		print_prompt();
+
+		cmd = read_command();
+
+		if (!cmd){
+			fprintf(stderr, "Error on get command\n");
+			return 0;
+		}
+	}
+
+	return 1;
+
+}

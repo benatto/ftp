@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <dirent.h>
+#include <errno.h>
+
+#define BUFF_SIZE 256
 
 /*
  * Describes some usefull env information
@@ -30,6 +33,19 @@ tenv_info *env;
  */
 int init_shell();
 
+/*Prints prompt line*/
 void print_prompt();
+
+/*Reads command from stdin
+ *returns the command if success
+ *and null if failed
+ */
+char *read_command();
+
+/*Starts shell
+ *returns 1 if success
+ *0 if failed
+*/
+int start_shell();
 
 #endif

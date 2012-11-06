@@ -4,6 +4,7 @@
 
 int main(int argc, char **argv){
 	char *user;
+	char *cmd;
 
 	user = getenv("USER");
 
@@ -11,9 +12,7 @@ int main(int argc, char **argv){
 
 	init_shell();
 
-	print_prompt();
-
-	sleep(100);
+	start_shell();	
 
 	return 0;
 }
