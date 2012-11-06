@@ -77,6 +77,9 @@ int start_shell(){
 
 int parse_command(char *cmd){
 	int i, cmd_value = -1;
+	char *arg = cmd;
+
+	cmd = strsep(&arg, " \t");
 
 	for (i = 0; i < CMD_COUNT; i++){
 		if (strcmp(cmd,cmds[i]) == 0){
@@ -87,8 +90,11 @@ int parse_command(char *cmd){
 
 	switch(cmd_value){
 		case ls:
+			execute_ls(env->pwd);
 		break;
 		case cd:
+			if (!execute_cd(arg, env))
+				printf("%s: not exists or not a directory\n", arg);
 		break;
 		case put:
 			printf("Operation not implemented yet\n");

@@ -4,21 +4,13 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <dirent.h>
 #include <errno.h>
+#include <string.h>
+#include "ls.h"
+#include "../types/env.h"
 
 #define BUFF_SIZE 256
 #define CMD_COUNT 5
-
-/*
- * Describes some usefull env information
- */
-typedef struct env_info{
-	char *user;
-	char *pwd;
-	char *user_home;
-	char *hostname;
-}tenv_info;
 
 typedef enum command{
 	ls = 0,
@@ -28,7 +20,7 @@ typedef enum command{
 	exit_ = 4
 }tcommand;
 
-tenv_info *env;
+volatile tenv_info *env;
 
 static char *cmds[] = {"ls", "cd", "get", "put", "exit"};
 

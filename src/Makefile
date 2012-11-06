@@ -2,7 +2,7 @@ CC     = gcc
 LD     = gcc
 CFLGAS = -Wall -O2 -g
 OBJS   = main.o
-FSHELL_OBJS = shell/fshell.o
+FSHELL_OBJS = shell/fshell.o shell/ls.o shell/cd.o
 
 .c.o:
 	$(CC) -c $(CFLAGS) -o $*.o $<
