@@ -8,6 +8,7 @@
 #include <errno.h>
 
 #define BUFF_SIZE 256
+#define CMD_COUNT 5
 
 /*
  * Describes some usefull env information
@@ -20,13 +21,16 @@ typedef struct env_info{
 }tenv_info;
 
 typedef enum command{
-	ls = 1,
-	cd = 2,
-	get = 3,
-	put = 4
+	ls = 0,
+	cd = 1,
+	get = 2,
+	put = 3,
+	exit_ = 4
 }tcommand;
 
 tenv_info *env;
+
+static char *cmds[] = {"ls", "cd", "get", "put", "exit"};
 
 /*Initilizes ftp shell env variables
  *returns 1 if success or 0 if failed
@@ -47,5 +51,10 @@ char *read_command();
  *0 if failed
 */
 int start_shell();
+
+/*Parses a command and executes it
+ *returns 1 if success or 0 if failed and sets ERRNO for related value
+*/
+int parse_command(char*);
 
 #endif

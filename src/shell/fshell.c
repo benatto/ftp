@@ -57,8 +57,8 @@ int start_shell(){
 		return 0;
 	}
 
+	parse_command(cmd);
 	while(strcmp(cmd, "exit") != 0){
-		printf("Read command: %s\n", cmd);
 		print_prompt();
 
 		cmd = read_command();
@@ -67,8 +67,45 @@ int start_shell(){
 			fprintf(stderr, "Error on get command\n");
 			return 0;
 		}
+
+		parse_command(cmd);
 	}
 
 	return 1;
 
+}
+
+int parse_command(char *cmd){
+	int i, cmd_value = -1;
+
+	for (i = 0; i < CMD_COUNT; i++){
+		if (strcmp(cmd,cmds[i]) == 0){
+			cmd_value = i;
+			break;
+		}
+	}
+
+	switch(cmd_value){
+		case ls:
+		break;
+		case cd:
+		break;
+		case put:
+			printf("Operation not implemented yet\n");
+			return 1;
+		break;
+		case get:
+			printf("Operation not implemented yet\n");
+			return 1;
+		break;
+		case exit_:
+			return 1;
+		break;
+		default:
+			printf("%s: Invalid command\n", cmd);
+			errno = EINVAL;
+			return 0;
+		break;
+
+	}
 }
