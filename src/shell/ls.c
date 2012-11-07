@@ -1,13 +1,13 @@
 #include "ls.h"
 
-int execute_ls(char *path){
+int execute_ls(tenv_info *env){
 	struct dirent *f;
 	DIR *d;
 
-	d = opendir(path);
+	d = opendir(env->pwd);
 
 	if (!d){
-		printf("Could not open %s: ", path);
+		printf("Could not open %s: ", env->pwd);
 
 		switch (errno){
 			case EACCES:

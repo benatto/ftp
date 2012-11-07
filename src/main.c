@@ -8,7 +8,12 @@ int main(int argc, char **argv){
 
 	user = getenv("USER");
 
-	fprintf(stdout, "Hi %s! It's ust a little beginning, soon everything will be working. That's all folk!\n", user);
+	fprintf(stdout, "Hi %s, see the list of active commands bellow:\n", user);
+	fprintf(stdout, " +ls\n");
+	fprintf(stdout, " +cd\n");
+	fprintf(stdout, " +get\n");
+	fprintf(stdout, " +put\n");
+	fprintf(stdout, " +exit\n");
 
 	init_shell();
 

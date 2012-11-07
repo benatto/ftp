@@ -20,7 +20,7 @@ typedef enum command{
 	exit_ = 4
 }tcommand;
 
-volatile tenv_info *env;
+tenv_info *env;
 
 static char *cmds[] = {"ls", "cd", "get", "put", "exit"};
 

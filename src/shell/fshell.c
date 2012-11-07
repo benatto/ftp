@@ -7,11 +7,15 @@ int init_shell(){
 		fprintf(stderr, "Error on initalizing fshell\n");
 		return 0;
 	}
+	
+	env->last_pwd = (char*)malloc(BUFF_SIZE * sizeof(char));
 
 	env->user = getenv("USER");
 	env->pwd = getenv("PWD");
 	env->user_home = getenv("HOME");
 	env->hostname = getenv("HOSTNAME");
+	
+	strcpy(env->last_pwd, env->pwd);
 
 	fprintf(stdout, "*** fshell initialized at location %s@%s:%s ***\n", env->user,
 									     env->hostname,
@@ -71,6 +75,8 @@ int start_shell(){
 		parse_command(cmd);
 	}
 
+	free(env);
+
 	return 1;
 
 }
@@ -90,7 +96,7 @@ int parse_command(char *cmd){
 
 	switch(cmd_value){
 		case ls:
-			execute_ls(env->pwd);
+			execute_ls(env);
 		break;
 		case cd:
 			if (!execute_cd(arg, env))
